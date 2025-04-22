@@ -106,25 +106,18 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navbar - Always visible with good contrast on mobile */}
-      <nav className={`fixed top-0 left-0 w-full z-50 ${
-        isMobile ? 'bg-white shadow-md' : 
-        scrolled ? 'bg-white shadow-md' : 'bg-black/40 backdrop-blur-sm'
-      }`}>
+      {/* Navbar - Updated theme and design */}
+      <nav className={`fixed top-0 left-0 w-full z-50 bg-[#006D5B] border-b border-[#004d3a] shadow-md transition-all duration-300`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           <div className="flex items-center">
-            <span className={`text-xl sm:text-2xl font-bold ${
-              (isMobile || scrolled) ? 'text-teal-700' : 'text-white'
-            }`}>ShopEase</span>
+            <span className="text-xl sm:text-2xl font-bold text-white font-serif tracking-wide">ShopEase</span>
           </div>
           <div className="hidden md:flex space-x-6">
             {navLinks.map(link => (
               <a 
                 key={link.name} 
                 href={link.href} 
-                className={`font-medium ${
-                  scrolled ? 'text-gray-700 hover:text-teal-700' : 'text-white hover:text-teal-100'
-                }`}
+                className="font-medium text-white hover:text-yellow-400 font-serif transition-colors duration-200"
               >
                 {link.name}
               </a>
@@ -132,13 +125,11 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </div>
           <div className="md:hidden">
             <button
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
                 setMenuOpen(!menuOpen);
               }}
-              className={`focus:outline-none ${
-                (isMobile || scrolled) ? 'text-gray-700 hover:text-teal-700' : 'text-white hover:text-teal-100'
-              }`}
+              className="focus:outline-none text-white hover:text-yellow-400"
               aria-label="Toggle menu"
             >
               {menuOpen ? (
@@ -153,18 +144,16 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </button>
           </div>
         </div>
-        {/* Mobile menu - animation simplified for performance */}
+        {/* Mobile menu - themed */}
         <div 
-          className={`md:hidden bg-white shadow-lg ${
-            menuOpen ? 'block' : 'hidden'
-          }`}
+          className={`md:hidden bg-[#006D5B] border-b border-[#004d3a] shadow-lg ${menuOpen ? 'block' : 'hidden'}`}
         >
           <div className="px-4 py-2">
             {navLinks.map(link => (
               <a
                 key={link.name}
                 href={link.href}
-                className="block py-3 text-gray-700 hover:text-teal-700 font-medium border-b border-gray-100 last:border-b-0"
+                className="block py-3 text-white hover:text-yellow-400 font-serif font-medium border-b border-[#004d3a] last:border-b-0 transition-colors duration-200"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.name}

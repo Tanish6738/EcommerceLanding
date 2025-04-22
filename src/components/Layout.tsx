@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect } from 'react';
+import React, { useState, memo, useEffect, useCallback } from 'react';
 
 const navLinks = [
   { name: 'Home', href: '#' },
@@ -52,47 +52,69 @@ const socialIcons = [
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Handle scroll effect for navbar
+  // Check if mobile
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Handle scroll effect for navbar - optimized with throttling
+  useEffect(() => {
+    // let lastScrollY = window.scrollY;
+    let ticking = false;
+
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const isScrolled = window.scrollY > 10;
+          if (isScrolled !== scrolled) {
+            setScrolled(isScrolled);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
     
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [scrolled]);
 
   // Close mobile menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (menuOpen && !target.closest('nav')) {
-        setMenuOpen(false);
-      }
-    };
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (menuOpen && !target.closest('nav')) {
+      setMenuOpen(false);
+    }
+  }, [menuOpen]);
 
+  useEffect(() => {
     document.addEventListener('click', handleClickOutside);
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, [menuOpen]);
+  }, [handleClickOutside]);
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navbar */}
-      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-md' : 'bg-transparent'
+      {/* Navbar - Always visible with good contrast on mobile */}
+      <nav className={`fixed top-0 left-0 w-full z-50 ${
+        isMobile ? 'bg-white shadow-md' : 
+        scrolled ? 'bg-white shadow-md' : 'bg-black/40 backdrop-blur-sm'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           <div className="flex items-center">
-            <span className={`text-xl sm:text-2xl font-bold transition-colors duration-300 ${
-              scrolled ? 'text-teal-700' : 'text-white'
+            <span className={`text-xl sm:text-2xl font-bold ${
+              (isMobile || scrolled) ? 'text-teal-700' : 'text-white'
             }`}>ShopEase</span>
           </div>
           <div className="hidden md:flex space-x-6">
@@ -100,7 +122,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <a 
                 key={link.name} 
                 href={link.href} 
-                className={`font-medium transition-colors duration-300 ${
+                className={`font-medium ${
                   scrolled ? 'text-gray-700 hover:text-teal-700' : 'text-white hover:text-teal-100'
                 }`}
               >
@@ -114,8 +136,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 e.stopPropagation();
                 setMenuOpen(!menuOpen);
               }}
-              className={`focus:outline-none transition-colors duration-300 ${
-                scrolled ? 'text-gray-700 hover:text-teal-700' : 'text-white hover:text-teal-100'
+              className={`focus:outline-none ${
+                (isMobile || scrolled) ? 'text-gray-700 hover:text-teal-700' : 'text-white hover:text-teal-100'
               }`}
               aria-label="Toggle menu"
             >
@@ -131,10 +153,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </button>
           </div>
         </div>
-        {/* Mobile menu - animation added */}
+        {/* Mobile menu - animation simplified for performance */}
         <div 
-          className={`md:hidden bg-white shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
-            menuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+          className={`md:hidden bg-white shadow-lg ${
+            menuOpen ? 'block' : 'hidden'
           }`}
         >
           <div className="px-4 py-2">
@@ -157,12 +179,12 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         {children}
       </main>
 
-      {/* Footer */}
+      {/* Footer - simplified for better performance */}
       <footer className="bg-white border-t py-8 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-between space-y-6">
           <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-2">
             {footerLinks.map(link => (
-              <a key={link.name} href={link.href} className="text-gray-600 hover:text-teal-700 text-sm font-medium transition-colors duration-200">
+              <a key={link.name} href={link.href} className="text-gray-600 hover:text-teal-700 text-sm font-medium">
                 {link.name}
               </a>
             ))}
@@ -172,7 +194,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <a 
                 key={icon.name} 
                 href={icon.href} 
-                className="text-gray-500 hover:text-teal-700 transition-colors duration-200 p-2 hover:bg-gray-100 rounded-full" 
+                className="text-gray-500 hover:text-teal-700 p-2 rounded-full" 
                 aria-label={icon.name}
               >
                 {icon.svg}

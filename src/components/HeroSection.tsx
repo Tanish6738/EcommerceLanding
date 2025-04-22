@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Suspense } from 'react';
 import * as THREE from 'three';
-
+ 
 const Spinner = () => (
   <div className="flex items-center justify-center w-full h-full">
     <svg className="animate-spin" width="36" height="36" viewBox="0 0 50 50">

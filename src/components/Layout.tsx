@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 
 const navLinks = [
   { name: 'Home', href: '#' },
@@ -51,72 +51,136 @@ const socialIcons = [
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolled]);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (menuOpen && !target.closest('nav')) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [menuOpen]);
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full bg-white shadow z-50">
+      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white shadow-md' : 'bg-transparent'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-teal-700">ShopEase</span>
+            <span className={`text-xl sm:text-2xl font-bold transition-colors duration-300 ${
+              scrolled ? 'text-teal-700' : 'text-white'
+            }`}>ShopEase</span>
           </div>
           <div className="hidden md:flex space-x-6">
             {navLinks.map(link => (
-              <a key={link.name} href={link.href} className="text-gray-700 hover:text-teal-700 font-medium transition-colors duration-200">
+              <a 
+                key={link.name} 
+                href={link.href} 
+                className={`font-medium transition-colors duration-300 ${
+                  scrolled ? 'text-gray-700 hover:text-teal-700' : 'text-white hover:text-teal-100'
+                }`}
+              >
                 {link.name}
               </a>
             ))}
           </div>
           <div className="md:hidden">
             <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="text-gray-700 hover:text-teal-700 focus:outline-none"
+              onClick={(e) => {
+                e.stopPropagation();
+                setMenuOpen(!menuOpen);
+              }}
+              className={`focus:outline-none transition-colors duration-300 ${
+                scrolled ? 'text-gray-700 hover:text-teal-700' : 'text-white hover:text-teal-100'
+              }`}
               aria-label="Toggle menu"
             >
-              <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              {menuOpen ? (
+                <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
-        {/* Mobile menu */}
-        {menuOpen && (
-          <div className="md:hidden bg-white shadow px-4 pb-4">
+        {/* Mobile menu - animation added */}
+        <div 
+          className={`md:hidden bg-white shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
+            menuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="px-4 py-2">
             {navLinks.map(link => (
               <a
                 key={link.name}
                 href={link.href}
-                className="block py-2 text-gray-700 hover:text-teal-700 font-medium"
+                className="block py-3 text-gray-700 hover:text-teal-700 font-medium border-b border-gray-100 last:border-b-0"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.name}
               </a>
             ))}
           </div>
-        )}
+        </div>
       </nav>
 
       {/* Main content */}
-      <main className="flex-1 pt-20 pb-16 bg-gray-50">
+      <main className="flex-1 pt-16 pb-16 bg-gray-50">
         {children}
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t py-6 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-          <div className="flex space-x-6 mb-2 md:mb-0">
+      <footer className="bg-white border-t py-8 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-between space-y-6">
+          <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-2">
             {footerLinks.map(link => (
               <a key={link.name} href={link.href} className="text-gray-600 hover:text-teal-700 text-sm font-medium transition-colors duration-200">
                 {link.name}
               </a>
             ))}
           </div>
-          <div className="flex space-x-4">
+          <div className="flex space-x-5">
             {socialIcons.map(icon => (
-              <a key={icon.name} href={icon.href} className="text-gray-500 hover:text-teal-700 transition-colors duration-200" aria-label={icon.name}>
+              <a 
+                key={icon.name} 
+                href={icon.href} 
+                className="text-gray-500 hover:text-teal-700 transition-colors duration-200 p-2 hover:bg-gray-100 rounded-full" 
+                aria-label={icon.name}
+              >
                 {icon.svg}
               </a>
             ))}
+          </div>
+          <div className="text-center text-gray-500 text-sm mt-4">
+            © {new Date().getFullYear()} ShopEase. All rights reserved.
           </div>
         </div>
       </footer>

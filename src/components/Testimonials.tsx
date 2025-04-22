@@ -103,7 +103,7 @@ const Testimonials: React.FC = () => {
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${activeIndex * 100}%)` }}
             >
-              {testimonials.map((t, i) => (
+              {testimonials.map((t) => (
                 <div 
                   key={t.name}
                   className="w-full flex-shrink-0 bg-white border border-gray-100 rounded-2xl shadow-lg p-6 flex flex-col items-center text-center"

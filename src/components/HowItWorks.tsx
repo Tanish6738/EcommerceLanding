@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 const steps = [
@@ -70,4 +70,4 @@ const HowItWorks: React.FC = () => (
   </section>
 );
 
-export default HowItWorks;
+export default memo(HowItWorks);

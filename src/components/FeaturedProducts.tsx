@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 const products = [
@@ -86,4 +86,4 @@ const FeaturedProducts: React.FC = () => (
   </section>
 );
 
-export default FeaturedProducts;
+export default memo(FeaturedProducts);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { motion } from 'framer-motion';
 
 const EmailSignup: React.FC = () => {
@@ -66,4 +66,4 @@ const EmailSignup: React.FC = () => {
   );
 };
 
-export default EmailSignup;
+export default memo(EmailSignup);

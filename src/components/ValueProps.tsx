@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 const features = [
@@ -67,4 +67,4 @@ const ValueProps: React.FC = () => (
   </section>
 );
 
-export default ValueProps;
+export default memo(ValueProps);

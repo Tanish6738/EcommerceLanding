@@ -43,23 +43,33 @@ const socialIcons = [
 ];
 
 const Footer: React.FC = () => (
-  <footer className="bg-[#006D5B] text-white py-6 mt-auto">
-    <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 mb-2 md:mb-0 items-center">
+  <footer className="bg-[#006D5B] text-white py-8 mt-auto border-t border-[#004d3a]">
+    <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
+      <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 mb-2 md:mb-0">
         {footerLinks.map(link => (
-          <a key={link.name} href={link.href} className="text-white hover:text-yellow-400 text-sm font-medium transition-colors duration-200">
+          <a
+            key={link.name}
+            href={link.href}
+            className="text-white hover:text-yellow-400 text-sm font-medium transition-colors duration-200 underline-offset-4 hover:underline"
+          >
             {link.name}
           </a>
         ))}
       </div>
-      <div className="flex space-x-4">
+      <div className="flex items-center gap-4">
         {socialIcons.map(icon => (
-          <a key={icon.name} href={icon.href} className="text-white hover:text-yellow-400 transition-colors duration-200" aria-label={icon.name}>
+          <a
+            key={icon.name}
+            href={icon.href}
+            className="text-white hover:text-yellow-400 transition-colors duration-200"
+            aria-label={icon.name}
+          >
             {icon.svg}
           </a>
         ))}
       </div>
     </div>
+    <div className="mt-4 text-center text-xs text-white/70">© {new Date().getFullYear()} ShopEase. All rights reserved.</div>
   </footer>
 );
 

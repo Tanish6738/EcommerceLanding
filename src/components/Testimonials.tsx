@@ -1,3 +1,4 @@
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 const testimonials = [
@@ -19,9 +20,16 @@ const testimonials = [
 ];
 
 const mediaLogos = [
-  'https://upload.wikimedia.org/wikipedia/commons/4/44/Google_News_icon.svg',
-  'https://upload.wikimedia.org/wikipedia/commons/0/08/TechCrunch_logo.svg',
+  'https://upload.wikimedia.org/wikipedia/commons/0/0e/Vogue_logo.svg',
+  'https://upload.wikimedia.org/wikipedia/commons/2/2e/Elle_Magazine_logo.svg',
+  'https://upload.wikimedia.org/wikipedia/commons/4/4e/Harper%27s_Bazaar_logo.svg',
   'https://upload.wikimedia.org/wikipedia/commons/6/62/Forbes_logo.svg',
+  'https://upload.wikimedia.org/wikipedia/commons/0/08/TechCrunch_logo.svg',
+  'https://upload.wikimedia.org/wikipedia/commons/2/2e/WWD_logo.svg',
+  'https://upload.wikimedia.org/wikipedia/commons/4/44/Google_News_icon.svg',
+  'https://upload.wikimedia.org/wikipedia/commons/6/6e/Logo_New_York_Times.svg',
+  'https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_BBC_News.svg',
+  'https://upload.wikimedia.org/wikipedia/commons/5/5a/Logo_CNN.svg',
 ];
 
 const Star = () => (
@@ -68,10 +76,10 @@ const Testimonials: React.FC = () => (
               alt="Media logo"
               className="h-10 w-auto grayscale opacity-70"
               loading="lazy"
-              initial={{ opacity: 0, y: 20 }}
+              initial={false} // Disable initial animation for performance
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5 + i * 0.1, ease: 'easeOut' }}
+             // Disable transition for instant appearance
             />
           ))}
         </div>
@@ -80,4 +88,4 @@ const Testimonials: React.FC = () => (
   </section>
 );
 
-export default Testimonials;
+export default memo(Testimonials);

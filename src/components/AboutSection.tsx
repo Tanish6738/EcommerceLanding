@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 const AboutSection: React.FC = () => (
@@ -37,4 +37,4 @@ const AboutSection: React.FC = () => (
   </section>
 );
 
-export default AboutSection;
+export default memo(AboutSection);

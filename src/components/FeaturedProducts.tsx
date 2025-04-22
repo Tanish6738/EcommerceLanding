@@ -42,7 +42,7 @@ const cardVariants = {
 };
 
 // Individual product card component to reduce re-renders
-const ProductCard = memo(({ product, index, isMobile }: { 
+const ProductCard = memo(({ product, isMobile }: { 
   product: typeof products[0], 
   index: number,
   isMobile: boolean

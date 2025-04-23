@@ -76,14 +76,14 @@ const HeroSection: React.FC = () => {
       )}
       {/* Content styled to match other sections */}
       <div
-        className="relative z-20 flex flex-col items-center justify-center text-center px-4 w-full max-w-2xl mx-auto bg-white/80 rounded-3xl shadow-2xl border border-[#e2d6c6] py-12 md:py-16"
+        className="relative z-20 flex flex-col items-center justify-center text-center px-2 xs:px-3 sm:px-4 w-full max-w-xl sm:max-w-2xl mx-auto bg-white/80 rounded-3xl shadow-2xl border border-[#e2d6c6] py-8 xs:py-10 sm:py-12 md:py-16"
         style={{ backdropFilter: 'blur(2px)' }}
       >
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="text-5xl xs:text-6xl sm:text-7xl md:text-8xl script-accent mb-4 md:mb-6 tracking-tight leading-[1.1] drop-shadow"
+          className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl script-accent mb-2 xs:mb-3 sm:mb-4 md:mb-6 tracking-tight leading-[1.1] drop-shadow"
         >
           Atelier Luxe
         </motion.h1>
@@ -91,14 +91,14 @@ const HeroSection: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-xl xs:text-2xl sm:text-3xl md:text-4xl text-[#7c6a58] mb-8 md:mb-12 max-w-2xl font-light font-sans px-2"
+          className="text-base xs:text-lg sm:text-2xl md:text-4xl text-[#7c6a58] mb-5 xs:mb-6 sm:mb-8 md:mb-12 max-w-2xl font-light font-sans px-1 xs:px-2"
         >
           Timeless Fashion. Modern Craft. Your Signature Style.
         </motion.p>
         <motion.a
           whileTap={{ scale: 0.98 }}
           href="#about"
-          className="px-6 sm:px-8 md:px-10 py-3 md:py-4 rounded-full btn text-lg sm:text-xl font-semibold shadow-lg hover:bg-[#3a2c1a] hover:text-[#f5eee6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#b8a99a] tracking-wide font-serif w-[80%] max-w-[300px] md:w-auto"
+          className="px-4 xs:px-6 sm:px-8 md:px-10 py-2 xs:py-3 md:py-4 rounded-full btn text-base xs:text-lg sm:text-xl font-semibold shadow-lg hover:bg-[#3a2c1a] hover:text-[#f5eee6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#b8a99a] tracking-wide font-serif w-[90%] max-w-[260px] sm:max-w-[300px] md:w-auto"
           aria-label="View Collection"
         >
           View Collection
@@ -106,9 +106,9 @@ const HeroSection: React.FC = () => {
         {/* Scroll indicator */}
         {!isLowPerformance && (
           <div
-            className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 animate-bounce"
+            className="absolute bottom-3 xs:bottom-4 sm:bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 animate-bounce"
           >
-            <svg width="28" height="28" fill="none" stroke="#b8a99a" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+            <svg width="24" height="24" fill="none" stroke="#b8a99a" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 5v14M19 12l-7 7-7-7" />
             </svg>
           </div>

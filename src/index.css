@@ -1,60 +1,152 @@
-/* Import Playfair Display and Dancing Script from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@700&display=swap');
+/* Import refined luxury fonts - Cormorant Garamond for elegance and Montserrat for modern look */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+
+/* Luxury color variables */
+:root {
+  --color-primary: #14213d; /* Deep navy */
+  --color-secondary: #e6b655; /* Rich gold */
+  --color-accent: #c9a87c; /* Champagne gold */
+  --color-dark: #0b0b0c; /* Almost black */
+  --color-light: #f9f9f9; /* Off-white */
+  --color-gray: #e5e5e5; /* Light gray */
+  --color-text: #212121; /* Dark gray for text */
+}
 
 html {
   scroll-behavior: smooth;
-  background-color: #f5eee6; /* Muted vintage cream */
-  /* Subtle grainy texture overlay using SVG data URI */
-  background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" fill="%23f5eee6"/><circle cx="20" cy="20" r="1.5" fill="%23d6cfc7" fill-opacity="0.18"/><circle cx="10" cy="30" r="1" fill="%23b8a99a" fill-opacity="0.12"/><circle cx="30" cx="10" r="1" fill="%23b8a99a" fill-opacity="0.12"/></svg>');
+  background-color: var(--color-light);
+  /* Subtle diamond pattern for luxury texture */
+  background-image: 
+    linear-gradient(45deg, var(--color-gray) 3%, transparent 3%),
+    linear-gradient(135deg, var(--color-gray) 3%, transparent 3%);
+  background-size: 30px 30px;
   background-repeat: repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-blend-mode: overlay;
 }
 
 body {
-  font-family: 'Playfair Display', 'Dancing Script', serif;
-  color: #3a2c1a;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--color-text);
   background: transparent;
+  line-height: 1.7;
+  font-weight: 300;
+  letter-spacing: 0.02em;
 }
 
+/* Elegant typography for headings */
 h1, h2, h3, h4, h5, h6, .font-serif {
-  font-family: 'Playfair Display', 'Dancing Script', serif;
-  letter-spacing: 0.01em;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.03em;
+  font-weight: 500;
 }
 
 .bold-typography, .font-extrabold, .font-bold, nav span, nav a, .text-4xl, .text-5xl, .text-6xl, .text-7xl, .text-8xl {
-  font-weight: 900;
-  letter-spacing: 0.02em;
-  text-shadow: 0 2px 8px rgba(90, 70, 40, 0.07);
-}
-
-/* Subtle border and shadow for retro effect */
-.card, .rounded-3xl, .shadow-xl, .shadow-2xl, .border {
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 32px 0 rgba(90, 70, 40, 0.08);
-  border: 1.5px solid #e2d6c6;
-}
-
-/* Vintage button style */
-button, .btn, .rounded-full {
-  font-family: 'Playfair Display', serif;
-  border-radius: 9999px;
-  background: linear-gradient(90deg, #b8a99a 0%, #e2d6c6 100%);
-  color: #3a2c1a;
-  border: 1.5px solid #b8a99a;
-  box-shadow: 0 2px 12px 0 rgba(90, 70, 40, 0.08);
-  transition: background 0.2s, color 0.2s;
-}
-button:hover, .btn:hover {
-  background: #3a2c1a;
-  color: #f5eee6;
-  border-color: #3a2c1a;
-}
-
-/* For script font accent (e.g. logo or special headings) */
-.script-accent {
-  font-family: 'Dancing Script', cursive;
-  font-weight: 700;
-  font-size: 2.2rem;
-  color: #b8a99a;
   letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-weight: 600; /* Slightly lighter for more elegance */
+}
+
+/* Luxury card styling */
+.card, .rounded-3xl, .shadow-xl, .shadow-2xl, .border {
+  border-radius: 0.5rem; /* More subtle, sophisticated border radius */
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(235, 235, 235, 0.8);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.card:hover, .shadow-xl:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Luxury button style */
+button, .btn, .rounded-full {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  border-radius: 0.25rem; /* Squared edges for modern luxury */
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+}
+
+button:hover, .btn:hover {
+  background: var(--color-dark);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
+}
+
+button::after, .btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-secondary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+button:hover::after, .btn:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* For logo and brand elements */
+.script-accent {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 2.2rem;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Luxury section styling */
+section {
+  padding: 6rem 0;
+}
+
+/* Subtle animations for luxury feel */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Luxury divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+  margin: 2rem auto;
+  width: 80%;
+}
+
+/* Gold accents */
+.gold-accent {
+  color: var(--color-accent);
+}
+
+/* Gradient text for headings */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }

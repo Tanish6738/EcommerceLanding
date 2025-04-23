@@ -40,26 +40,37 @@ const cardVariants = {
 };
 
 const HowItWorks: React.FC = () => (
-  <section className="py-20 bg-gradient-to-b from-[#f8fafc] to-[#f2e9e1] font-serif" id="how-it-works">
+  <section className="py-20 bg-gradient-to-b from-[#e2d6c6] to-[#f5eee6] font-serif" id="how-it-works">
     <motion.div
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.2 }}
       className="max-w-5xl mx-auto px-4 md:px-8 lg:px-12"
     >
-      <h2 className="text-4xl font-serif font-bold mb-12 text-center text-gray-900 tracking-tight">How It Works</h2>
+      <motion.h2
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className="text-4xl script-accent mb-12 text-center text-[#3a2c1a] tracking-tight drop-shadow"
+      >How It Works</motion.h2>
       <div className="flex flex-col md:flex-row items-center md:justify-between gap-10 relative">
         {steps.map((step, i) => (
           <motion.div
             key={step.title}
-            className="flex-1 flex flex-col items-center text-center bg-white border border-gray-100 rounded-3xl shadow-xl p-10 relative z-10 transition-transform hover:-translate-y-2 hover:shadow-2xl duration-200 font-serif"
+            className="flex-1 flex flex-col items-center text-center bg-white border border-[#e2d6c6] rounded-3xl shadow-xl p-10 relative z-10 transition-transform hover:-translate-y-2 hover:shadow-2xl duration-200 font-serif cursor-pointer"
             custom={i}
             variants={cardVariants}
-            whileHover={{ scale: 1.03, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
+            whileHover={{ scale: 1.06, rotate: 1 }}
+            whileTap={{ scale: 0.98, rotate: -1 }}
           >
-            <div className="mb-5 text-gray-900">{step.icon}</div>
-            <h3 className="font-semibold text-2xl mb-2 text-gray-900 tracking-tight font-serif">{step.title}</h3>
-            <p className="text-gray-500 text-lg font-sans">{step.desc}</p>
+            <motion.div
+              className="mb-5 text-gray-900"
+              whileHover={{ rotate: 10 }}
+              transition={{ type: 'spring', stiffness: 200 }}
+            >{step.icon}</motion.div>
+            <h3 className="script-accent mb-2 text-[#3a2c1a] tracking-tight">{step.title}</h3>
+            <p className="text-[#7c6a58] text-lg font-sans">{step.desc}</p>
           </motion.div>
         ))}
         {/* Connecting lines/arrows */}

@@ -1,4 +1,5 @@
 import React, { useState, memo, useEffect, useCallback } from 'react';
+import Contact from './Contact';
 
 const navLinks = [
   { name: 'Home', href: '#' },
@@ -52,14 +53,12 @@ const socialIcons = [
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   // Check if mobile
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      // No longer needed
     };
-    
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -107,17 +106,17 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navbar - Updated theme and design */}
-      <nav className={`fixed top-0 left-0 w-full z-50 bg-[#006D5B] border-b border-[#004d3a] shadow-md transition-all duration-300`}>
+      <nav className={`fixed top-0 left-0 w-full z-50 bg-[#f5eee6] border-b border-[#e2d6c6] shadow-md transition-all duration-300`} style={{backgroundBlendMode: 'multiply'}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           <div className="flex items-center">
-            <span className="text-xl sm:text-2xl font-bold text-white font-serif tracking-wide">ShopEase</span>
+            <span className="script-accent text-2xl sm:text-3xl tracking-wider drop-shadow font-bold">ShopEase</span>
           </div>
           <div className="hidden md:flex space-x-6">
             {navLinks.map(link => (
               <a 
                 key={link.name} 
                 href={link.href} 
-                className="font-medium text-white hover:text-yellow-400 font-serif transition-colors duration-200"
+                className="bold-typography text-[#3a2c1a] hover:text-[#b8a99a] font-serif transition-colors duration-200 text-lg tracking-wide"
               >
                 {link.name}
               </a>
@@ -129,7 +128,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 e.stopPropagation();
                 setMenuOpen(!menuOpen);
               }}
-              className="focus:outline-none text-white hover:text-yellow-400"
+              className="focus:outline-none text-[#3a2c1a] hover:text-[#b8a99a]"
               aria-label="Toggle menu"
             >
               {menuOpen ? (
@@ -146,14 +145,14 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         </div>
         {/* Mobile menu - themed */}
         <div 
-          className={`md:hidden bg-[#006D5B] border-b border-[#004d3a] shadow-lg ${menuOpen ? 'block' : 'hidden'}`}
+          className={`md:hidden bg-[#f5eee6] border-b border-[#e2d6c6] shadow-lg ${menuOpen ? 'block' : 'hidden'}`}
         >
           <div className="px-4 py-2">
             {navLinks.map(link => (
               <a
                 key={link.name}
                 href={link.href}
-                className="block py-3 text-white hover:text-yellow-400 font-serif font-medium border-b border-[#004d3a] last:border-b-0 transition-colors duration-200"
+                className="block py-3 bold-typography text-[#3a2c1a] hover:text-[#b8a99a] font-serif border-b border-[#e2d6c6] last:border-b-0 transition-colors duration-200 text-lg tracking-wide"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.name}
@@ -164,16 +163,17 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       </nav>
 
       {/* Main content */}
-      <main className="flex-1 pt-16 pb-16 bg-gray-50">
+      <main className="flex-1 pt-16 pb-16 bg-transparent">
         {children}
+        <Contact />
       </main>
 
-      {/* Footer - simplified for better performance */}
-      <footer className="bg-white border-t py-8 mt-auto">
+      {/* Footer - retro/vintage theme */}
+      <footer className="bg-[#f5eee6] border-t border-[#e2d6c6] py-10 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-between space-y-6">
           <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-2">
             {footerLinks.map(link => (
-              <a key={link.name} href={link.href} className="text-gray-600 hover:text-teal-700 text-sm font-medium">
+              <a key={link.name} href={link.href} className="text-[#7c6a58] hover:text-[#b8a99a] text-base font-serif font-medium underline-offset-4 hover:underline transition-colors duration-200">
                 {link.name}
               </a>
             ))}
@@ -183,14 +183,14 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <a 
                 key={icon.name} 
                 href={icon.href} 
-                className="text-gray-500 hover:text-teal-700 p-2 rounded-full" 
+                className="text-[#b8a99a] hover:text-[#3a2c1a] p-2 rounded-full transition-colors duration-200" 
                 aria-label={icon.name}
               >
                 {icon.svg}
               </a>
             ))}
           </div>
-          <div className="text-center text-gray-500 text-sm mt-4">
+          <div className="text-center text-[#b8a99a] text-base mt-4 font-serif tracking-wide">
             © {new Date().getFullYear()} ShopEase. All rights reserved.
           </div>
         </div>

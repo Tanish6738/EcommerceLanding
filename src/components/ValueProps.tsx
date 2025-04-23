@@ -41,7 +41,7 @@ const cardVariants = {
 };
 
 const ValueProps: React.FC = () => (
-  <section className="py-20 bg-gradient-to-b from-[#f8fafc] to-[#f2e9e1]" id="features">
+  <section className="py-20 bg-gradient-to-b from-[#f5eee6] to-[#e2d6c6]" id="features">
     <motion.div
       initial="offscreen"
       whileInView="onscreen"
@@ -52,14 +52,19 @@ const ValueProps: React.FC = () => (
         {features.map((f, i) => (
           <motion.div
             key={f.title}
-            className="flex-1 bg-white border border-gray-100 rounded-3xl shadow-xl p-10 flex flex-col items-center text-center transition-transform hover:-translate-y-2 hover:shadow-2xl duration-200 font-serif"
+            className="flex-1 bg-white border border-[#e2d6c6] rounded-3xl shadow-xl p-10 flex flex-col items-center text-center transition-transform hover:-translate-y-2 hover:shadow-2xl duration-200 font-serif cursor-pointer"
             custom={i}
             variants={cardVariants}
-            whileHover={{ scale: 1.03, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
+            whileHover={{ scale: 1.06, rotate: -2 }}
+            whileTap={{ scale: 0.98, rotate: 1 }}
           >
-            <div className="mb-5 text-gray-900">{f.icon}</div>
-            <h3 className="text-2xl font-bold mb-2 text-gray-900 tracking-tight font-serif">{f.title}</h3>
-            <p className="text-gray-500 text-lg font-sans">{f.desc}</p>
+            <motion.div
+              className="mb-5 text-gray-900"
+              whileHover={{ rotate: 8 }}
+              transition={{ type: 'spring', stiffness: 200 }}
+            >{f.icon}</motion.div>
+            <h3 className="text-2xl script-accent mb-2 text-[#3a2c1a] tracking-tight">{f.title}</h3>
+            <p className="text-[#7c6a58] text-lg font-sans">{f.desc}</p>
           </motion.div>
         ))}
       </div>

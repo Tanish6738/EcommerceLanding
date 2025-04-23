@@ -69,29 +69,36 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="py-12 md:py-20 bg-gradient-to-b from-[#f2e9e1] to-[#f8fafc] font-serif" id="testimonials">
+    <section className="py-12 md:py-20 bg-gradient-to-b from-[#f5eee6] to-[#e2d6c6] font-serif" id="testimonials">
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.2 }}
         className="max-w-5xl mx-auto px-4 md:px-8 lg:px-12"
       >
-        <h2 className="text-3xl md:text-4xl font-serif font-bold mb-8 md:mb-12 text-center text-gray-900 tracking-tight">What Our Customers Say</h2>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="text-3xl md:text-4xl script-accent mb-8 md:mb-12 text-center text-[#3a2c1a] tracking-tight drop-shadow"
+        >What Our Customers Say</motion.h2>
         
         {/* Desktop view - show all testimonials */}
         <div className="hidden md:flex flex-row gap-10 justify-center items-stretch mb-12">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              className="flex-1 bg-white border border-gray-100 rounded-3xl shadow-xl p-10 flex flex-col items-center text-center transition-transform hover:-translate-y-2 hover:shadow-2xl duration-200 font-serif"
+              className="flex-1 bg-white border border-[#e2d6c6] rounded-3xl shadow-xl p-10 flex flex-col items-center text-center transition-transform hover:-translate-y-2 hover:shadow-2xl duration-200 font-serif cursor-pointer"
               custom={i}
               variants={cardVariants}
-              whileHover={{ scale: 1.03, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
+              whileHover={{ scale: 1.06, rotate: 1 }}
+              whileTap={{ scale: 0.98, rotate: -1 }}
             >
-              <img src={t.avatar} alt={t.name} className="w-20 h-20 rounded-full mb-5 object-cover shadow" loading="lazy" />
-              <h3 className="font-semibold text-xl mb-1 text-gray-900 font-serif">{t.name}</h3>
+              <motion.img src={t.avatar} alt={t.name} className="w-20 h-20 rounded-full mb-5 object-cover shadow" loading="lazy" whileHover={{ rotate: 8 }} transition={{ type: 'spring', stiffness: 200 }} />
+              <h3 className="script-accent mb-1 text-[#3a2c1a]">{t.name}</h3>
               <div className="flex mb-2" aria-label="5 star rating">{Array(5).fill(0).map((_, i) => <Star key={i} />)}</div>
-              <p className="text-gray-500 text-lg font-sans">"{t.quote}"</p>
+              <p className="text-[#7c6a58] text-lg font-sans">"{t.quote}"</p>
             </motion.div>
           ))}
         </div>
@@ -104,15 +111,17 @@ const Testimonials: React.FC = () => {
               style={{ transform: `translateX(-${activeIndex * 100}%)` }}
             >
               {testimonials.map((t) => (
-                <div 
+                <motion.div 
                   key={t.name}
-                  className="w-full flex-shrink-0 bg-white border border-gray-100 rounded-2xl shadow-lg p-6 flex flex-col items-center text-center"
+                  className="w-full flex-shrink-0 bg-white border border-[#e2d6c6] rounded-2xl shadow-lg p-6 flex flex-col items-center text-center cursor-pointer"
+                  whileHover={{ scale: 1.04, rotate: 1 }}
+                  whileTap={{ scale: 0.97, rotate: -1 }}
                 >
-                  <img src={t.avatar} alt={t.name} className="w-16 h-16 rounded-full mb-4 object-cover shadow" loading="lazy" />
-                  <h3 className="font-semibold text-lg mb-1 text-gray-900 font-serif">{t.name}</h3>
+                  <motion.img src={t.avatar} alt={t.name} className="w-16 h-16 rounded-full mb-4 object-cover shadow" loading="lazy" whileHover={{ rotate: 8 }} transition={{ type: 'spring', stiffness: 200 }} />
+                  <h3 className="script-accent mb-1 text-[#3a2c1a]">{t.name}</h3>
                   <div className="flex mb-2" aria-label="5 star rating">{Array(5).fill(0).map((_, i) => <Star key={i} />)}</div>
-                  <p className="text-gray-500 text-base font-sans">"{t.quote}"</p>
-                </div>
+                  <p className="text-[#7c6a58] text-base font-sans">"{t.quote}"</p>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -131,7 +140,7 @@ const Testimonials: React.FC = () => {
         </div>
 
         <div className="text-center">
-          <div className="mb-3 text-gray-500 text-sm md:text-base font-sans">As seen in</div>
+          <div className="mb-3 text-[#b8a99a] text-sm md:text-base font-sans">As seen in</div>
           <div className="flex flex-wrap justify-center gap-4 md:gap-8 items-center">
             {mediaLogos.map((logo, i) => (
               <motion.img

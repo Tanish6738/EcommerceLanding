@@ -48,24 +48,27 @@ const ProductCard = memo(({ product, isMobile }: {
   isMobile: boolean
 }) => {
   return (
-    <motion.div
+    <motion.div 
       key={product.name}
-      className="min-w-[220px] sm:min-w-[260px] max-w-xs flex-shrink-0 bg-white border border-gray-100 rounded-2xl md:rounded-3xl shadow-md hover:shadow-xl flex flex-col items-center p-5 sm:p-8 snap-center font-serif"
+      className="min-w-[220px] sm:min-w-[260px] max-w-xs flex-shrink-0 bg-white border border-[#e2d6c6] rounded-2xl md:rounded-3xl shadow-md hover:shadow-xl flex flex-col items-center p-5 sm:p-8 snap-center font-serif cursor-pointer"
       variants={cardVariants}
-      // Only enable hover animations on desktop
-      {...(!isMobile && { whileHover: { scale: 1.02 } })}
+      whileHover={{ scale: 1.04, y: -8 }}
+      whileTap={{ scale: 0.97, y: 2 }}
     >
-      <img
+      <motion.img
         src={product.image}
         alt={product.name}
         className="w-32 h-32 sm:w-40 sm:h-40 object-cover rounded-xl md:rounded-2xl mb-4 sm:mb-6 shadow-sm"
         loading="lazy"
+        whileHover={{ rotate: 6 }}
+        transition={{ type: 'spring', stiffness: 200 }}
       />
-      <h3 className="font-semibold text-base sm:text-xl mb-1 text-center text-gray-900 font-serif">{product.name}</h3>
-      <p className="text-gray-700 font-bold mb-3 font-sans text-sm sm:text-base">{product.price}</p>
+      <h3 className="script-accent mb-1 text-center text-[#3a2c1a]">{product.name}</h3>
+      <p className="text-[#7c6a58] font-bold mb-3 font-sans text-sm sm:text-base">{product.price}</p>
       <motion.button
+        whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.97 }}
-        className="mt-auto px-4 sm:px-6 py-2 rounded-full bg-gray-900 text-white text-sm sm:text-base font-medium shadow hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 font-sans"
+        className="mt-auto px-4 sm:px-6 py-2 rounded-full btn text-sm sm:text-base font-medium shadow hover:bg-[#3a2c1a] hover:text-[#f5eee6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#b8a99a] font-serif"
         aria-label={`View ${product.name} in App`}
       >
         View in App
@@ -137,11 +140,17 @@ const FeaturedProducts: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-12 md:py-20 bg-gradient-to-b from-[#f2e9e1] to-[#f8fafc]" id="products">
+    <section className="py-12 md:py-20 bg-gradient-to-b from-[#e2d6c6] to-[#f5eee6]" id="products">
       <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
-        <h2 className="text-3xl md:text-4xl font-serif font-bold mb-8 md:mb-12 text-center text-gray-900 tracking-tight">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="text-3xl md:text-4xl script-accent mb-8 md:mb-12 text-center text-[#3a2c1a] tracking-tight drop-shadow"
+        >
           Featured Looks
-        </h2>
+        </motion.h2>
         
         <div className="relative">
           {/* Product carousel - simplified for performance */}
@@ -195,7 +204,7 @@ const FeaturedProducts: React.FC = () => {
         {/* Button - simplified animation */}
         <div className="mt-10 text-center">
           <button
-            className="inline-flex items-center px-6 py-3 rounded-full bg-transparent border-2 border-gray-900 text-gray-900 font-semibold hover:bg-gray-900 hover:text-white transition-all duration-300 active:scale-95"
+            className="inline-flex items-center px-6 py-3 rounded-full btn text-[#3a2c1a] font-semibold hover:bg-[#3a2c1a] hover:text-[#f5eee6] transition-all duration-300 active:scale-95"
           >
             View All Products
             <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

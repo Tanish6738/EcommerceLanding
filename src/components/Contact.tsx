@@ -36,20 +36,20 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-[#e2d6c6] to-[#f5eee6] font-serif">
-      <div className="max-w-2xl mx-auto px-4 md:px-8 lg:px-12">
+    <section id="contact" className="py-12 sm:py-20 bg-gradient-to-b from-[#e2d6c6] to-[#f5eee6] font-serif">
+      <div className="max-w-lg sm:max-w-2xl mx-auto px-2 xs:px-4 sm:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="text-3xl sm:text-4xl script-accent mb-8 text-[#3a2c1a] tracking-tight drop-shadow text-center"
+          className="text-xl xs:text-2xl sm:text-3xl script-accent mb-6 sm:mb-8 text-[#3a2c1a] tracking-tight drop-shadow text-center"
         >
           Contact Us
         </motion.h2>
         <motion.form
           onSubmit={handleSubmit}
-          className="bg-white/90 rounded-3xl shadow-xl border border-[#e2d6c6] p-8 flex flex-col gap-6"
+          className="bg-white/90 rounded-2xl sm:rounded-3xl shadow-xl border border-[#e2d6c6] p-5 sm:p-8 flex flex-col gap-4 sm:gap-6"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}

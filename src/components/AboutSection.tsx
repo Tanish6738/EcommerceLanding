@@ -2,14 +2,14 @@ import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 const AboutSection: React.FC = () => (
-  <section id="about" className="py-24 bg-[#f5eee6] font-serif">
-    <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 px-4 md:px-8 lg:px-12">
+  <section id="about" className="py-16 sm:py-24 bg-[#f5eee6] font-serif">
+    <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 sm:gap-12 px-2 xs:px-4 sm:px-8">
       <motion.div
         initial={{ opacity: 0, x: -60 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 1, ease: 'easeOut' }}
-        className="flex-1 w-full max-w-md md:max-w-none mb-8 md:mb-0"
+        className="flex-1 w-full max-w-xs xs:max-w-sm sm:max-w-md md:max-w-none mb-6 sm:mb-8 md:mb-0"
       >
         <img
           src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80"
@@ -23,7 +23,7 @@ const AboutSection: React.FC = () => (
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-        className="flex-1 w-full max-w-xl md:max-w-none"
+        className="flex-1 w-full max-w-lg md:max-w-none"
       >
         <motion.h2
           initial={{ opacity: 0, y: 30 }}

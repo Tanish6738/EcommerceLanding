@@ -69,78 +69,78 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="py-12 md:py-20 bg-gradient-to-b from-[#f5eee6] to-[#e2d6c6] font-serif" id="testimonials">
-      <motion.div
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ once: true, amount: 0.2 }}
-        className="max-w-5xl mx-auto px-4 md:px-8 lg:px-12"
-      >
+    <section className="relative py-12 sm:py-20 bg-gradient-to-b from-[#f5eee6] to-[#e2d6c6] font-serif" id="testimonials">
+      {/* Decorative background accent */}
+      <div className="absolute inset-0 pointer-events-none select-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90vw] h-40 bg-gradient-to-r from-[#e6b65522] via-[#fff0] to-[#e6b65522] rounded-b-3xl blur-2xl opacity-60" />
+      </div>
+      <motion.div className="relative max-w-5xl mx-auto px-4 sm:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="text-3xl md:text-4xl script-accent mb-8 md:mb-12 text-center text-[#3a2c1a] tracking-tight drop-shadow"
-        >What Our Customers Say</motion.h2>
-        
+          className="text-3xl sm:text-4xl md:text-5xl script-accent mb-10 text-center text-[#3a2c1a] tracking-tight drop-shadow-lg"
+        >
+          What Our Customers Say
+        </motion.h2>
         {/* Desktop view - show all testimonials */}
-        <div className="hidden md:flex flex-row gap-10 justify-center items-stretch mb-12">
+        <div className="hidden md:flex gap-8 justify-center items-stretch mb-14">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              className="flex-1 bg-white border border-[#e2d6c6] rounded-3xl shadow-xl p-10 flex flex-col items-center text-center transition-transform hover:-translate-y-2 hover:shadow-2xl duration-200 font-serif cursor-pointer"
+              className="flex-1 bg-white border border-[#e2d6c6] rounded-3xl shadow-2xl p-10 flex flex-col items-center text-center transition-transform hover:-translate-y-2 hover:shadow-2xl duration-200 font-serif cursor-pointer group"
               custom={i}
               variants={cardVariants}
               whileHover={{ scale: 1.06, rotate: 1 }}
               whileTap={{ scale: 0.98, rotate: -1 }}
             >
-              <motion.img src={t.avatar} alt={t.name} className="w-20 h-20 rounded-full mb-5 object-cover shadow" loading="lazy" whileHover={{ rotate: 8 }} transition={{ type: 'spring', stiffness: 200 }} />
-              <h3 className="script-accent mb-1 text-[#3a2c1a]">{t.name}</h3>
+              <motion.img src={t.avatar} alt={t.name} className="w-20 h-20 rounded-full mb-5 object-cover shadow-lg border-4 border-[#f5eee6] group-hover:border-[#e6b655] transition-all duration-300" loading="lazy" whileHover={{ rotate: 8 }} transition={{ type: 'spring', stiffness: 200 }} />
+              <h3 className="script-accent mb-1 text-[#3a2c1a] text-xl font-semibold">{t.name}</h3>
               <div className="flex mb-2" aria-label="5 star rating">{Array(5).fill(0).map((_, i) => <Star key={i} />)}</div>
-              <p className="text-[#7c6a58] text-lg font-sans">"{t.quote}"</p>
+              <p className="text-[#7c6a58] text-lg font-sans italic leading-relaxed">“{t.quote}”</p>
             </motion.div>
           ))}
         </div>
-        
         {/* Mobile view - carousel style */}
-        <div className="md:hidden relative mb-8">
-          <div className="overflow-hidden">
+        <div className="md:hidden relative mb-10">
+          <div className="overflow-hidden rounded-2xl shadow-xl border border-[#e2d6c6] bg-white/90">
             <div 
-              className="flex transition-transform duration-500 ease-in-out"
+              className="flex transition-transform duration-500 ease-in-out w-full"
               style={{ transform: `translateX(-${activeIndex * 100}%)` }}
             >
               {testimonials.map((t) => (
                 <motion.div 
                   key={t.name}
-                  className="w-full flex-shrink-0 bg-white border border-[#e2d6c6] rounded-2xl shadow-lg p-6 flex flex-col items-center text-center cursor-pointer"
+                  className="w-full flex-shrink-0 p-7 flex flex-col items-center text-center cursor-pointer min-w-0"
                   whileHover={{ scale: 1.04, rotate: 1 }}
                   whileTap={{ scale: 0.97, rotate: -1 }}
                 >
-                  <motion.img src={t.avatar} alt={t.name} className="w-16 h-16 rounded-full mb-4 object-cover shadow" loading="lazy" whileHover={{ rotate: 8 }} transition={{ type: 'spring', stiffness: 200 }} />
-                  <h3 className="script-accent mb-1 text-[#3a2c1a]">{t.name}</h3>
+                  <div className="w-20 h-20 flex items-center justify-center mb-4">
+                    <motion.img src={t.avatar} alt={t.name} className="w-16 h-16 rounded-full object-cover shadow-lg border-4 border-[#f5eee6]" loading="lazy" style={{display:'block',maxWidth:'100%',height:'auto'}} whileHover={{ rotate: 8 }} transition={{ type: 'spring', stiffness: 200 }} />
+                  </div>
+                  <h3 className="script-accent mb-1 text-[#3a2c1a] text-lg font-semibold">{t.name}</h3>
                   <div className="flex mb-2" aria-label="5 star rating">{Array(5).fill(0).map((_, i) => <Star key={i} />)}</div>
-                  <p className="text-[#7c6a58] text-base font-sans">"{t.quote}"</p>
+                  <p className="text-[#7c6a58] text-base font-sans italic leading-relaxed">“{t.quote}”</p>
                 </motion.div>
               ))}
             </div>
           </div>
-          
           {/* Mobile navigation dots */}
           <div className="flex justify-center gap-2 mt-6">
             {testimonials.map((_, i) => (
               <button
                 key={i}
-                className={`w-2.5 h-2.5 rounded-full ${i === activeIndex ? 'bg-gray-800' : 'bg-gray-300'}`}
+                className={`w-3 h-3 rounded-full border-2 border-[#e6b655] transition-all duration-200 ${i === activeIndex ? 'bg-[#e6b655] scale-110 shadow' : 'bg-white'}`}
                 onClick={() => goToTestimonial(i)}
                 aria-label={`Go to testimonial ${i + 1}`}
               />
             ))}
           </div>
         </div>
-
-        <div className="text-center">
-          <div className="mb-3 text-[#b8a99a] text-sm md:text-base font-sans">As seen in</div>
+        {/* Media logos */}
+        <div className="text-center mt-8">
+          <div className="mb-3 text-[#b8a99a] text-sm md:text-base font-sans tracking-wide uppercase">As seen in</div>
           <div className="flex flex-wrap justify-center gap-4 md:gap-8 items-center">
             {mediaLogos.map((logo, i) => (
               <motion.img

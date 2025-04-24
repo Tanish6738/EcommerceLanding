@@ -115,7 +115,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[var(--color-light)]">
       {/* Luxury Navbar */}
       <nav 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -123,9 +123,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             ? 'bg-white shadow-lg backdrop-blur-md' 
             : 'bg-transparent'
         }`}
+        style={{ maxWidth: '100%', overflowX: 'hidden' }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="flex items-center justify-between h-20">
+        <div className="w-full px-2 xs:px-4 sm:px-8 mx-auto" style={{maxWidth:'100vw'}}>
+          <div className="flex items-center justify-between h-20 w-full">
             <div className="flex items-center">
               <span className="script-accent text-2xl sm:text-3xl tracking-widest">ShopEase</span>
             </div>
@@ -211,8 +212,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
       {/* Main content */}
       <main className="flex-1 pt-20">
-        {children}
-        <Contact />
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-8">
+          {children}
+          <Contact />
+        </div>
       </main>
 
       {/* Luxury Footer */}

@@ -40,21 +40,23 @@ const cardVariants = {
 };
 
 const HowItWorks: React.FC = () => (
-  <section className="py-20 bg-gradient-to-b from-[#e2d6c6] to-[#f5eee6] font-serif" id="how-it-works">
+  <section className="py-12 sm:py-20 bg-gradient-to-b from-[#e2d6c6] to-[#f5eee6] font-serif" id="how-it-works">
     <motion.div
+      className="max-w-7xl mx-auto px-2 xs:px-4 sm:px-8"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.2 }}
-      className="max-w-5xl mx-auto px-4 md:px-8 lg:px-12"
     >
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="text-4xl script-accent mb-12 text-center text-[#3a2c1a] tracking-tight drop-shadow"
-      >How It Works</motion.h2>
-      <div className="flex flex-col md:flex-row items-center md:justify-between gap-10 relative">
+        className="text-2xl xs:text-3xl md:text-4xl script-accent mb-8 sm:mb-12 text-center text-[#3a2c1a] tracking-tight drop-shadow"
+      >
+        How It Works
+      </motion.h2>
+      <div className="flex flex-col md:flex-row items-center md:justify-between gap-6 sm:gap-10 relative">
         {steps.map((step, i) => (
           <motion.div
             key={step.title}

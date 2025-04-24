@@ -28,16 +28,16 @@ const EmailSignup: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-[#f5eee6] to-[#e2d6c6] font-serif" id="signup">
+    <section className="py-12 sm:py-20 bg-gradient-to-b from-[#f5eee6] to-[#e2d6c6] font-serif" id="signup">
       <motion.div
+        className="max-w-lg sm:max-w-2xl mx-auto px-2 xs:px-4 sm:px-8 text-center"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="max-w-xl mx-auto px-4 md:px-8 lg:px-12 text-center"
       >
-        <h2 className="text-3xl sm:text-4xl script-accent mb-8 text-[#3a2c1a] tracking-tight drop-shadow">Join our VIP list for early access & 10% off</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <h2 className="text-xl xs:text-2xl sm:text-3xl script-accent mb-6 sm:mb-8 text-[#3a2c1a] tracking-tight drop-shadow">Join our VIP list for early access & 10% off</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center items-center">
           <motion.input
             type="email"
             value={email}

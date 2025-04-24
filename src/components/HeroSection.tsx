@@ -1,82 +1,12 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
-// Lazy load heavy Three.js components
-const ThreeScene = lazy(() => import('../components/ThreeScene'));
-
-const Spinner = () => (
-  <div className="flex items-center justify-center w-full h-full">
-    <svg className="animate-spin" width="36" height="36" viewBox="0 0 50 50">
-      <circle cx="25" cy="25" r="20" fill="none" stroke="#888" strokeWidth="5" strokeDasharray="31.4 31.4" />
-    </svg>
-  </div>
-);
-
-// Static fallback for very low-performance devices
-const StaticImage = () => (
-  <div className="absolute inset-0 flex items-center justify-center">
-    <img 
-      src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?auto=format&fit=crop&w=800&q=80" 
-      alt="Luxurious cube display" 
-      className="w-40 h-40 object-cover rounded-xl shadow-lg opacity-80"
-    />
-  </div>
-);
-
 const HeroSection: React.FC = () => {
-  // States for component
-  const [show3D, setShow3D] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isLowPerformance, setIsLowPerformance] = useState(false);
-  
-  // Performance detection
-  useEffect(() => {
-    // Check device performance and screen size
-    const checkDevice = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
-      
-      // Check for low performance devices
-      const lowPerformance = mobile && 
-        (navigator.hardwareConcurrency <= 4 || 
-         /Android [456]|iPhone OS ([789]|1[0-2])_/.test(navigator.userAgent));
-      
-      setIsLowPerformance(lowPerformance);
-    };
-    
-    checkDevice();
-    window.addEventListener('resize', checkDevice);
-    
-    // Delayed loading of 3D scene
-    const timer = setTimeout(() => {
-      setShow3D(true);
-    }, isLowPerformance ? 800 : isMobile ? 400 : 200);
-    
-    return () => {
-      window.removeEventListener('resize', checkDevice);
-      clearTimeout(timer);
-    };
-  }, [isMobile, isLowPerformance]);
-
   return (
-    <section className="relative w-full h-[100vh] md:h-[90vh] min-h-[500px] md:min-h-[600px] flex items-center justify-center bg-transparent font-serif overflow-hidden border-b border-[#e2d6c6]">
-      {/* 3D or static visual remains */}
-      {!isLowPerformance ? (
-        <div className="absolute inset-0 z-10 pointer-events-none">
-          {show3D ? (
-            <Suspense fallback={<Spinner />}>
-              <ThreeScene isMobile={isMobile} />
-            </Suspense>
-          ) : (
-            <Spinner />
-          )}
-        </div>
-      ) : (
-        <StaticImage />
-      )}
+    <section className="relative w-full h-[90vh] min-h-[400px] flex items-center justify-center bg-transparent font-serif overflow-hidden border-b border-[#e2d6c6] sm:h-[90vh] sm:min-h-[500px] max-w-full overflow-x-hidden">
       {/* Content styled to match other sections */}
       <div
-        className="relative z-20 flex flex-col items-center justify-center text-center px-2 xs:px-3 sm:px-4 w-full max-w-xl sm:max-w-2xl mx-auto bg-white/80 rounded-3xl shadow-2xl border border-[#e2d6c6] py-8 xs:py-10 sm:py-12 md:py-16"
+        className="relative z-20 flex flex-col items-center justify-center text-center box-border px-2 xs:px-4 sm:px-8 max-w-lg sm:max-w-2xl mx-auto bg-white/90 rounded-2xl sm:rounded-3xl shadow-2xl border border-[#e2d6c6] py-7 xs:py-10 sm:py-16 w-full"
         style={{ backdropFilter: 'blur(2px)' }}
       >
         <motion.h1
@@ -104,15 +34,13 @@ const HeroSection: React.FC = () => {
           View Collection
         </motion.a>
         {/* Scroll indicator */}
-        {!isLowPerformance && (
-          <div
-            className="absolute bottom-3 xs:bottom-4 sm:bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 animate-bounce"
-          >
-            <svg width="24" height="24" fill="none" stroke="#b8a99a" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 5v14M19 12l-7 7-7-7" />
-            </svg>
-          </div>
-        )}
+        <div
+          className="absolute bottom-3 xs:bottom-4 sm:bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 animate-bounce"
+        >
+          <svg width="24" height="24" fill="none" stroke="#b8a99a" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 5v14M19 12l-7 7-7-7" />
+          </svg>
+        </div>
       </div>
     </section>
   );

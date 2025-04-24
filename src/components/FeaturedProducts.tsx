@@ -140,14 +140,14 @@ const FeaturedProducts: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-12 md:py-20 bg-gradient-to-b from-[#e2d6c6] to-[#f5eee6]" id="products">
-      <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
+    <section className="py-8 sm:py-12 md:py-20 bg-gradient-to-b from-[#e2d6c6] to-[#f5eee6]" id="products">
+      <div className="max-w-7xl mx-auto px-2 xs:px-4 sm:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="text-3xl md:text-4xl script-accent mb-8 md:mb-12 text-center text-[#3a2c1a] tracking-tight drop-shadow"
+          className="text-2xl xs:text-3xl md:text-4xl script-accent mb-6 sm:mb-8 md:mb-12 text-center text-[#3a2c1a] tracking-tight drop-shadow"
         >
           Featured Looks
         </motion.h2>
@@ -202,7 +202,7 @@ const FeaturedProducts: React.FC = () => {
         </div>
         
         {/* Button - simplified animation */}
-        <div className="mt-10 text-center">
+        <div className="mt-7 sm:mt-10 text-center">
           <button
             className="inline-flex items-center px-6 py-3 rounded-full btn text-[#3a2c1a] font-semibold hover:bg-[#3a2c1a] hover:text-[#f5eee6] transition-all duration-300 active:scale-95"
           >

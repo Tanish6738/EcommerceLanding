@@ -41,14 +41,14 @@ const cardVariants = {
 };
 
 const ValueProps: React.FC = () => (
-  <section className="py-20 bg-gradient-to-b from-[#f5eee6] to-[#e2d6c6]" id="features">
+  <section className="py-12 sm:py-20 bg-gradient-to-b from-[#f5eee6] to-[#e2d6c6]" id="features">
     <motion.div
+      className="max-w-7xl mx-auto px-2 xs:px-4 sm:px-8"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.3 }}
-      className="max-w-6xl mx-auto px-4"
     >
-      <div className="flex flex-col md:flex-row gap-10 justify-center items-stretch">
+      <div className="flex flex-col md:flex-row gap-6 sm:gap-10 justify-center items-stretch">
         {features.map((f, i) => (
           <motion.div
             key={f.title}
